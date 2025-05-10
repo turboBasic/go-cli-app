@@ -17,14 +17,16 @@ var helloCmd = &cobra.Command{
 	Run: func(cmd *cobra.Command, args []string) {
 		PrintFlags(cmd)
 		if len(args) <= 0 {
-			fmt.Println("Hello, world!")
+			fmt.Printf("%s, world!", cfgSalutation)
 			return
 		}
 		for _, name := range args {
-			fmt.Printf("Hello, %s!\n", name)
+			fmt.Printf("%s, %s!\n", cfgSalutation, name)
 		}
 	},
 }
+
+var cfgSalutation string
 
 func init() {
 	rootCmd.AddCommand(helloCmd)
@@ -33,7 +35,7 @@ func init() {
 
 	// Cobra supports Persistent Flags which will work for this command
 	// and all subcommands, e.g.:
-	// helloCmd.PersistentFlags().String("foo", "", "A help for foo")
+	helloCmd.PersistentFlags().StringVarP(&cfgSalutation, "salut", "s", "Hello", "salutation")
 
 	// Cobra supports local flags which will only run when this command
 	// is called directly, e.g.:
