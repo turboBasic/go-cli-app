@@ -15,6 +15,7 @@ var helloCmd = &cobra.Command{
 	Short: "Say hello",
 	Long:  `Print greeting for provided list of entities.`,
 	Run: func(cmd *cobra.Command, args []string) {
+		PrintFlags(cmd)
 		if len(args) <= 0 {
 			fmt.Println("Hello, world!")
 			return
